@@ -4,21 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Cửa Hàng Sneaker</title>
-</head>
-<body>
-    <header>
-        <div class="header-container">
-            <img src="logo.jpg" alt="Logo" class="logo">
-            <h1>Cửa Hàng Sneaker</h1>
-            <nav>
-                <ul>
-                    <li><a href="#products">Sản Phẩm</a></li>
-                    <li><a href="#info">Thông Tin</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <style>
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .popup.active {
+            display: block;
+        }
+
+        .product {
+            text-align: center; 
+            margin-bottom: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .cart-button {
+            margin-left: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.8em;
+        }
+    </style>
+<header>
+    <div class="header-container">
+        <img src="logo.jpg" alt="Logo" class="logo">
+        <h1>Cửa Hàng Sneaker</h1>
+        <nav>
+            <ul>
+                <li><a href="#products">Sản Phẩm</a></li>
+                <li><a href="#info">Thông Tin</a></li>
+                <li>
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
     <main>
         <section id="products">
             <h2>Sản Phẩm Nổi Bật</h2>
@@ -27,73 +114,109 @@
                     <img src="1.jpg" alt="Giày Thể Thao">
                     <h3>Giày Thể Thao</h3>
                     <p>500.000 VNĐ</p>
-                    <button>Mua Ngay</button>
+                    <div class="button-container">
+                        <button onclick="purchaseProduct('Giày Thể Thao', 500000)">Mua Ngay</button>
+                        <button class="cart-button" onclick="addToCart('Giày Thể Thao', 500000)"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
                 </div>
                 <div class="product">
                     <img src="2.jpg" alt="Giày Da">
                     <h3>Giày Da</h3>
                     <p>1.000.000 VNĐ</p>
-                    <button>Mua Ngay</button>
+                    <div class="button-container">
+                        <button onclick="purchaseProduct('Giày Da', 1000000)">Mua Ngay</button>
+                        <button class="cart-button" onclick="addToCart('Giày Da', 1000000)"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
                 </div>
                 <div class="product">
                     <img src="3.jpg" alt="Giày Sandal">
                     <h3>Giày Sandal</h3>
                     <p>300.000 VNĐ</p>
-                    <button>Mua Ngay</button>
+                    <div class="button-container">
+                        <button onclick="purchaseProduct('Giày Sandal', 300000)">Mua Ngay</button>
+                        <button class="cart-button" onclick="addToCart('Giày Sandal', 300000)"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
                 </div>
                 <div class="product">
                     <img src="4.jpg" alt="Giày Boot">
                     <h3>Giày Boot</h3>
                     <p>1.200.000 VNĐ</p>
-                    <button>Mua Ngay</button>
+                    <div class="button-container">
+                        <button onclick="purchaseProduct('Giày Boot', 1200000)">Mua Ngay</button>
+                        <button class="cart-button" onclick="addToCart('Giày Boot', 1200000)"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
                 </div>
                 <div class="product">
                     <img src="5.jpg" alt="Giày Bóng Đá">
                     <h3>Giày Bóng Đá</h3>
                     <p>700.000 VNĐ</p>
-                    <button>Mua Ngay</button>
+                    <div class="button-container">
+                        <button onclick="purchaseProduct('Giày Bóng Đá', 700000)">Mua Ngay</button>
+                        <button class="cart-button" onclick="addToCart('Giày Bóng Đá', 700000)"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
                 </div>
                 <div class="product">
                     <img src="6.jpg" alt="Giày Chạy Bộ">
                     <h3>Giày Chạy Bộ</h3>
                     <p>800.000 VNĐ</p>
-                    <button>Mua Ngay</button>
+                    <div class="button-container">
+                        <button onclick="purchaseProduct('Giày Chạy Bộ', 800000)">Mua Ngay</button>
+                        <button class="cart-button" onclick="addToCart('Giày Chạy Bộ', 800000)"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
                 </div>
                 <div class="product">
                     <img src="7.jpg" alt="Giày Slip-On">
                     <h3>Giày Slip-On</h3>
                     <p>450.000 VNĐ</p>
-                    <button>Mua Ngay</button>
+                    <div class="button-container">
+                        <button onclick="purchaseProduct('Giày Slip-On', 450000)">Mua Ngay</button>
+                        <button class="cart-button" onclick="addToCart('Giày Slip-On', 450000)"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
                 </div>
                 <div class="product">
                     <img src="8.jpg" alt="Giày Cổ Cao">
                     <h3>Giày Cổ Cao</h3>
                     <p>900.000 VNĐ</p>
-                    <button>Mua Ngay</button>
+                    <div class="button-container">
+                        <button onclick="purchaseProduct('Giày Cổ Cao', 900000)">Mua Ngay</button>
+                        <button class="cart-button" onclick="addToCart('Giày Cổ Cao', 900000)"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
                 </div>
                 <div class="product">
                     <img src="9.jpg" alt="Giày Lười">
                     <h3>Giày Lười</h3>
                     <p>600.000 VNĐ</p>
-                    <button>Mua Ngay</button>
+                    <div class="button-container">
+                        <button onclick="purchaseProduct('Giày Lười', 600000)">Mua Ngay</button>
+                        <button class="cart-button" onclick="addToCart('Giày Lười', 600000)"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
                 </div>
                 <div class="product">
                     <img src="10.jpg" alt="Giày Công Sở">
                     <h3>Giày Công Sở</h3>
                     <p>1.100.000 VNĐ</p>
-                    <button>Mua Ngay</button>
+                    <div class="button-container">
+                        <button onclick="purchaseProduct('Giày Công Sở', 1100000)">Mua Ngay</button>
+                        <button class="cart-button" onclick="addToCart('Giày Công Sở', 1100000)"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
                 </div>
                 <div class="product">
                     <img src="11.jpg" alt="Giày Casual">
                     <h3>Giày Casual</h3>
                     <p>650.000 VNĐ</p>
-                    <button>Mua Ngay</button>
+                    <div class="button-container">
+                        <button onclick="purchaseProduct('Giày Casual', 650000)">Mua Ngay</button>
+                        <button class="cart-button" onclick="addToCart('Giày Casual', 650000)"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
                 </div>
                 <div class="product">
                     <img src="12.jpg" alt="Giày Đá Banh">
                     <h3>Giày Đá Banh</h3>
                     <p>750.000 VNĐ</p>
-                    <button>Mua Ngay</button>
+                    <div class="button-container">
+                        <button onclick="purchaseProduct('Giày Đá Banh', 750000)">Mua Ngay</button>
+                        <button class="cart-button" onclick="addToCart('Giày Đá Banh', 750000)"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -122,8 +245,50 @@
         </section>
     </main>
     <footer>
-        <p>&copy; 2024 Cửa Hàng Sneaker. Tất cả quyền được bảo lưu.</p>
+        <p>&copy; 2024 Sneaker Store. All rights reserved.</p>
     </footer>
-    <script src="script.js"></script>
+    <div class="popup" id="popup">
+        <p id="popup-message">Sản phẩm đã được thêm vào giỏ hàng!</p>
+        <button onclick="closePopup()">Đóng</button>
+    </div>
+    <script>
+        function addToCart(productName, price) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingProductIndex = cart.findIndex(item => item.name === productName);
+            if (existingProductIndex !== -1) {
+                cart[existingProductIndex].quantity += 1;
+            } else {
+                cart.push({ name: productName, price: price, quantity: 1 });
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            showPopup('Sản phẩm đã được thêm vào giỏ hàng!');
+            updateCartCount();
+        }
+
+        function purchaseProduct(productName, price) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({ name: productName, price: price, quantity: 1 });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            window.location.href = 'cart.html';
+        }
+
+        function showPopup(message) {
+            document.getElementById('popup-message').innerText = message;
+            document.getElementById('popup').classList.add('active');
+            setTimeout(closePopup, 3000); 
+        }
+
+        function closePopup() {
+            document.getElementById('popup').classList.remove('active');
+        }
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+
+        window.onload = updateCartCount;
+    </script>
 </body>
 </html>
