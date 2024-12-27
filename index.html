@@ -55,8 +55,8 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px;
-            background: white;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background: #555; /* Nền header */
+            color: white; /* Màu chữ header */
         }
 
         nav ul {
@@ -67,14 +67,14 @@
 
         nav a {
             text-decoration: none;
-            color: #333;
+            color: white; /* Màu chữ liên kết */
         }
 
         .cart-icon {
             position: relative;
             cursor: pointer;
             font-size: 1.5em;
-            color: #333;
+            color: white; /* Màu cart icon */
         }
 
         .cart-count {
@@ -88,24 +88,26 @@
             font-size: 0.8em;
         }
     </style>
-<header>
-    <div class="header-container">
-        <img src="logo.jpg" alt="Logo" class="logo">
-        <h1>Cửa Hàng Sneaker</h1>
-        <nav>
-            <ul>
-                <li><a href="#products">Sản Phẩm</a></li>
-                <li><a href="#info">Thông Tin</a></li>
-                <li>
-                    <a href="cart.html" class="cart-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count" id="cart-count">0</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</header>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <img src="logo.jpg" alt="Logo" class="logo">
+            <h1>Cửa Hàng Sneaker</h1>
+            <nav>
+                <ul>
+                    <li><a href="#products">Sản Phẩm</a></li>
+                    <li><a href="#info">Thông Tin</a></li>
+                    <li>
+                        <a href="cart.html" class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count" id="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
     <main>
         <section id="products">
             <h2>Sản Phẩm Nổi Bật</h2>
